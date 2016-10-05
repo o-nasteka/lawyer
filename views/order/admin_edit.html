@@ -1,0 +1,46 @@
+<br>
+<br>
+<br>
+
+<h3>Редактировать заявку</h3><br/>
+<form method="post" action="">
+    <input type="hidden" name="id" value="<?=$data['order']['id']?>" />
+
+    <div class="form-group">
+        <label for="name">Имя</label>
+        <input type="text" id="name" name="name" value="<?=htmlspecialchars(@$data['order']['name'])?>" maxlength="25" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="phone">Телефон</label>
+        <input type="text" id="phone" name="phone" value="<?=htmlspecialchars(@$data['order']['phone'])?>" maxlength="15" class="form-control"  />
+    </div>
+    <div class="form-group">
+        <label for="title">Наименование</label>
+        <input type="text" id="title" name="title" value="<?=htmlspecialchars(@$data['order']['title'])?>" class="form-control"  />
+    </div>
+    <div class="form-group">
+        <label for="status">Статус</label>
+        <select id="status" name="status" class="form-control">
+            <option value="<?=htmlspecialchars(@$data['order']['status'])?>"></option>
+            <option value="0">Новая</option>
+            <option value="1">Подтверждена</option>
+            <option value="4">Просчет</option>
+            <option value="2">Отмена</option>
+            <option value="3">Успешно завершена</option>
+
+        </select>
+    </div>
+
+    <input type="submit" class="btn btn-success" value="Сохранить">
+
+    <a href="/admin/order/"><input type="button" class="btn btn-warning" value="Отмена"></a>
+
+    <script>
+        // CKEDITOR.replace( 'content_short' );
+        // CKEDITOR.replace( 'gallery_img' );
+        // config.height = '500px';
+    </script>
+
+</form>
+
+

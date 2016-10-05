@@ -1,0 +1,83 @@
+<br>
+<br>
+<br>
+
+<h3>Заявки с  сайта</h3><br/>
+<table class="table table-bordered table-striped table-hover" style="width: 100%;">
+    <tr>
+        <td style="width: 2%;"> <strong>№</strong> </td>
+        <td style="width: 5%;"> <strong>Дата/Время</strong> </td>
+        <td style="width: 10%;"> <strong>Имя</strong> </td>
+        <td style="width: 10%;"> <strong>Телефон</strong> </td>
+        <td style="width: 10%;"> <strong>Наименование</strong> </td>
+        <td style="width: 10%;"> <strong>Статус</strong> </td>
+        <td style="width: 15%;"> <strong>Управление</strong> </td>
+    </tr>
+    <?php foreach($data['item'] as $item) { ?>
+    <tr>
+        <td><?=$item['id']?></td>
+        <td><?=$item['date']?></td>
+        <td><?=$item['name']?></td>
+        <td><?=$item['phone']?></td>
+        <td><?=$item['title']?></td>
+
+        <!-- Статус заказ  // Order status -->
+        <?php
+
+        if($item['status'] == 0){?>
+           <td><?php echo "Новая";?></td>
+        <?php }
+
+        elseif($item['status'] == 1){?>
+        <td class="bg-primary"><?php echo "Подтверждена";?></td>
+        <?php }
+
+        elseif($item['status'] == 4){?>
+        <td class="bg-warning"><?php echo "Просчет";?></td>
+        <?php }
+
+        elseif($item['status'] == 2){?>
+        <td class="bg-danger"><?php echo "Отмена";?></td>
+        <?php }
+
+        elseif($item['status'] == 3){?>
+        <td class="bg-success"><?php echo "Успешно завершена";?></td>
+        <?php }
+
+        ?>
+        <!-- Статус заказ  // Order status end -->
+
+        <td width="250" align="center">
+            <a href="/admin/order/edit/<?=$item['id']?>"><button class="btn btn-sm btn-primary" style="padding: 5px 20px;">Редактировать</button></a>
+            <a href="/admin/order/delete/<?=$item['id']?>" onclick="return confirmDelete();"><button class="btn btn-sm btn-warning" style="padding: 5px 20px;">Удалить</button></a>
+        </td>
+    </tr>
+    <?php } ?>
+</table>
+
+<!-- pagination -->
+<?php if($data['count'] > $data['limit']) { ?>
+<nav>
+    <ul class="pagination">
+        <?php $prev = $data['start'] - $data['limit'];
+                            if($prev >= 0){ ?>
+        <li>
+            <a href="/admin/order/index/start/<?php echo ($data['start'] - $data['limit']); ?>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <?php } ?>
+        <?php echo @$data[html]; ?>
+
+        <?php $next = ($data['count'] - $data['start']) - $data['limit'];
+                         if($next > 0 ){ ?>
+        <li>
+            <a href="/admin/order/index/start/<?php echo ($data['start'] + $data['limit']); ?>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        <?php } ?>
+    </ul>
+</nav>
+<?php } ?>
+<!-- pagination end -->
